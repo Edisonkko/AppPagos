@@ -1,0 +1,71 @@
+<mat-toolbar class="mat-elevation-z8 responsive-toolbar">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    
+    <span class="logo">Gestion de Pagos DirecTV</span>
+  </mat-toolbar>
+  
+     
+  <mat-sidenav-container class="example-container" >
+      <mat-sidenav class="custom-modal" #sidenav="matSidenav" mode="side" opened>
+          <div class="sidebar-content">
+              <img class="avatar mat-elevation-z8" src="https://cdn.pixabay.com/photo/2020/05/01/19/00/medical-5118706_1280.png" alt="">
+              <h4 class="name" *ngIf="userLoginOn">{{correo}}</h4>
+              <p class="designation" *ngIf="userLoginOn">{{admin}}</p>
+  
+              <mat-divider></mat-divider>
+  
+              <button mat-button class="menu-button" *ngFor="let item of listaOptMenus">
+                  <mat-icon>app_registration</mat-icon>
+                  <span><a (click)="ir(item.PAGINA)">{{item.NOM_MENU}}</a></span>
+              </button>
+
+              <mat-divider></mat-divider>
+              <button mat-button class="menu-button" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Salir</span>
+            </button>
+
+          </div>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <div class="content-center">
+  
+          <div class="content mat-elevation-z8" >
+            <router-outlet></router-outlet>
+            <div class="grid-container" *ngIf="isMainPage">
+              <h1 class="mat-h1">Gestión de Pagos DirecTV</h1>
+              <mat-grid-list cols="2" rowHeight="350px">
+                <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
+                  <mat-card class="dashboard-card">
+                    <mat-card-header>
+                      <mat-card-title>
+                        {{card.title}}
+                        <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" xPosition="before">
+                          <button mat-menu-item>Expand</button>
+                          <button mat-menu-item>Remove</button>
+                        </mat-menu>
+                      </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="dashboard-card-content">
+                      <div [innerHTML]="card.content"></div>
+                    </mat-card-content>
+                  </mat-card>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+            
+          </div>
+        </div>   
+            
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
+  

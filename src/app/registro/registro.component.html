@@ -1,0 +1,89 @@
+<body>
+    <div class="wrapper">
+      
+    
+      <div class="form-box register">
+        <h2>Registro</h2>
+        <form (ngSubmit)="crearUsuario()" [formGroup]="myForm">
+          <div class="row">
+            <div class="col">
+              <div class="input-box">
+                <input type="text" id="per_nom" formControlName="per_nom" class="form-control" [class.is-invalid]="f.per_nom.errors && f.per_nom.touched" required>
+                <label for="per_nom">Nombre:</label>
+                <div *ngIf="f.per_nom.errors && f.per_nom.touched" class="invalid-feedback">
+                  <div *ngIf="f.per_nom.errors.required">El nombre es requerido.</div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col">
+              <div class="input-box">
+                <input type="text" id="per_apellido" formControlName="per_apellido" class="form-control" [class.is-invalid]="f.per_apellido.errors && f.per_apellido.touched" required>
+                <label for="per_apellido">Apellido:</label>
+                <div *ngIf="f.per_apellido.errors && f.per_apellido.touched" class="invalid-feedback">
+                  <div *ngIf="f.per_apellido.errors.required">El apellido es requerido.</div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col">
+              <div class="input-box">
+                <input type="text" id="per_ced" formControlName="per_ced" class="form-control" [class.is-invalid]="f.per_ced.errors && f.per_ced.touched" required>
+                <label for="per_ced">Cédula:</label>
+                <div *ngIf="f.per_ced.errors && f.per_ced.touched" class="invalid-feedback">
+                  <div *ngIf="f.per_ced.errors.required">La cédula es requerida.</div>
+                  <div *ngIf="f.per_ced.errors.pattern">La cédula debe tener exactamente 10 números.</div>
+                  <div *ngIf="f.per_ced.errors?.cedulaEcuatoriana" class="error-message">La cédula no es válida.</div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col">
+              <div class="input-box">
+                <input type="text" id="per_tel" formControlName="per_tel" class="form-control" [class.is-invalid]="f.per_tel.errors && f.per_tel.touched" required>
+                <label for="per_tel">Teléfono:</label>
+                <div *ngIf="f.per_tel.errors && f.per_tel.touched" class="invalid-feedback">
+                  <div *ngIf="f.per_tel.errors.required">El teléfono es requerido.</div>
+                  <div *ngIf="f.per_tel.errors.pattern">La cédula debe tener exactamente 10 números.</div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+          <div class="input-box">
+            <input type="email" id="correo" formControlName="correo" [class.is-invalid]="f.correo.errors && f.correo.touched" required>
+            <label>Correo</label>
+            <div *ngIf="f.correo.errors && f.correo.touched" class="invalid-feedback">
+              <div *ngIf="f.correo.errors.required">El correo es requerido.</div>
+              <div *ngIf="f.correo.errors.email">Ingrese un correo válido.</div>
+            </div>
+          </div>
+          
+          
+          <div class="input-box">
+            <input type="password" id="usr_pass" formControlName="usr_pass" [class.is-invalid]="f.usr_pass.errors && f.usr_pass.touched" required>
+            <label for="usr_pass">Contraseña</label>
+            <div *ngIf="f.usr_pass.errors && f.usr_pass.touched" class="invalid-feedback">
+              <div *ngIf="f.usr_pass.errors.required">La contraseña es requerida.</div>
+            </div>
+          </div>
+          
+          
+          <!-- <div class="remember-forgot">
+            <label><input type="checkbox">agree to the terms & conditions</label>
+          </div> -->
+          <button type="submit" class="btn" [disabled]="myForm.invalid">Registro</button>
+          
+          <div class="login-register">
+            <p>¿tienes una cuenta? <a (click)="login()" class="login-link">Inicio Sesion</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  
+  

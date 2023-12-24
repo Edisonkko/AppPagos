@@ -1,0 +1,65 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+
+  margin: 10px; /* Margen alrededor de las tarjetas */
+  padding: 15px; /* Espaciado interno en las tarjetas */
+  border: 1px solid #ccc; /* Borde para las tarjetas */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Sombra para un efecto visual */
+  background-color: #f9f9f9; /* Fondo de la tarjeta */
+  color: #333; /* Color del texto */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Cambia la sombra al pasar el ratón */
+  transform: translateY(-5px); /* Un pequeño efecto de elevación */
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  transition: background-color 0.3s ease;
+}
+.more-button:hover {
+  background-color: #aaa; /* Cambia el color al pasar el ratón */
+}
+
+.dashboard-card-content {
+  text-align: center;
+  font-size: 16px;
+  line-height: 2.6; /* Aumenta el espaciado entre líneas */
+  margin-top: 10px;
+}
+
+.mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mat-h1 {
+  font-size: 36px; /* Tamaño del texto */
+  margin: 20px 0; /* Margen superior e inferior */
+  color: #2c3e50; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+  text-transform: uppercase; /* Transforma el texto a mayúsculas */
+  letter-spacing: 2px; /* Espaciado entre letras */
+  font-weight: bold; /* Peso de la fuente */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para un efecto sutil */
+}
+
