@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LoginServiceService {
-  URL_API: string = 'http://localhost/APIPAGOS/';
+  URL_API: string = 'https://dispensario.000webhostapp.com/APIPAGOS/';
   private userLoginOn: boolean = false;
   
   
