@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PagosService {
-  URL_API: string = 'http://localhost/APIPAGOS/';
+  URL_API: string = 'https://dispensario.000webhostapp.com/APIPAGOS/';
 
   constructor(private http: HttpClient) { }
 
