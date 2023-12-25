@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { PagosService } from '../services/pagos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,6 +73,11 @@ export class DashboardComponent {
     }, []);
   
     this.cards = [...currentMonthCards, ...notCurrentMonthCards];
+
+    this.cards.forEach((card) => {
+      const pagosPersona = this.pagos.filter((pago) => pago.Nombre_Cliente === card.title);
+      card.pagos = pagosPersona; // Almacena los pagos asociados a esta persona en la tarjeta
+    });
   }
   
   
@@ -101,6 +107,47 @@ export class DashboardComponent {
     `;
   }
   
+  pagar(card:any) {
+    if (card.pagos && card.pagos.length > 0) {
+      const primerPago = card.pagos[0]; // Aquí accedes al primer pago de esa persona
+      const fechaActual = new Date();
+      console.log(primerPago);
+      // Lógica para realizar el pago utilizando primerPago u otros datos relevantes
+      const nuevoPago = {
+        PAC_ID: primerPago.ID_PAC,
+        FECHA_PAGOS: this.getFormattedDate(fechaActual),
+        MONTO_PAGOS: 18,
+        ESTADO_PAGOS: "Completo"
+      };
+      this.servPagos.registrarPagos(nuevoPago).subscribe(resp=>{
+        Swal.fire(
+          resp.mensaje,
+          'De click en el boton',
+          'success'
+        ).then(result=>{
+          if(result.isConfirmed){
+            location.reload();
+          }
+        });
+      });
+    }
+    
+  }
+  getFormattedDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = this.padZero(date.getMonth() + 1); // Sumamos 1 porque los meses van de 0 a 11
+    const day = this.padZero(date.getDate());
+  
+    return `${year}-${month}-${day}`;
+  }
+  
+  padZero(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
+
+  pagarAnticipo() {
+    
+  }
   
   
   
