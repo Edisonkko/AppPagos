@@ -1,59 +1,4 @@
-/* Estilos para pantallas medianas */
-@media (max-width: 1024px) {
-    .responsive-toolbar {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 10px; /* Ajusta el espaciado interno */
-    }
-  
-    .responsive-toolbar span.logo {
-      margin-top: 8px;
-      margin-bottom: 8px;
-      font-size: 1.5em; /* Ajusta el tamaño de la fuente del logo */
-    }
-  
-    .responsive-toolbar .navigation {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 0;
-    }
-  
-    .responsive-toolbar .navigation a.mat-button {
-      margin-left: 0;
-      margin-top: 8px; /* Ajusta el espaciado superior de los enlaces */
-    }
-  
-  }
-  
-  /* Estilos adicionales para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .responsive-toolbar {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .responsive-toolbar span.logo {
-      margin-top: 8px;
-      margin-bottom: 8px;
-    }
-  
-    .responsive-toolbar .navigation {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 0;
-    }
-  
-    .responsive-toolbar .navigation a.mat-button {
-      margin-left: 0;
-    }
-    
-  
-  }
-  
+ 
   
   mat-toolbar {
     background: #650476;
@@ -144,14 +89,7 @@
   }
   
   
-  .container {
-    overflow: auto;
-    display: flex;
-    scroll-snap-type: x mandatory;
-    width: 90%;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
+  
   
   .card {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
