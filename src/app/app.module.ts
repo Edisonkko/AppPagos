@@ -18,6 +18,13 @@ import { DashboardComponent } from './pagos/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ModalpagosComponent } from './modalpagos/modalpagos.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -29,6 +36,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MainComponent,
     RegistroComponent,
     DashboardComponent,
+    ModalpagosComponent,
     
   ],
   imports: [
@@ -46,7 +54,13 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

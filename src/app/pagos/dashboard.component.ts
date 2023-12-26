@@ -3,6 +3,8 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { PagosService } from '../services/pagos.service';
 import Swal from 'sweetalert2';
+import { ModalpagosComponent } from '../modalpagos/modalpagos.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ export class DashboardComponent {
   pagos: any[] = [];
   cards: any[] = [];
 
-  constructor(private servPagos: PagosService, private breakpointObserver: BreakpointObserver) {}
+  constructor(private servPagos: PagosService, private breakpointObserver: BreakpointObserver, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getPagos();
@@ -66,7 +68,7 @@ export class DashboardComponent {
           title: clientName,
           cols: 1,
           rows: 1,
-          content: 'Pago pendiente'
+          content: this.formatPaymentData(pago)
         });
       }
       return cards;
@@ -84,28 +86,25 @@ export class DashboardComponent {
   
 
   formatPaymentData(pago: any) {
-    const formattedDate = pago.FECHA_PAGOS ? new Date(pago.FECHA_PAGOS).toLocaleDateString() : 'Fecha pendiente';
+    const isPendingPayment = pago.content === 'Pago pendiente';
+    const formattedDate = isPendingPayment ? new Date().toLocaleDateString() : (pago.FECHA_PAGOS ? new Date(pago.FECHA_PAGOS).toLocaleDateString() : 'Fecha pendiente');
+    const formattedAmount = `$${Number(18).toFixed(2)}`;
+    const amountPaid = isPendingPayment ? '$0.00' : (isNaN(pago.MONTO_PAGOS) ? 'Monto no válido' : `$${Number(pago.MONTO_PAGOS).toFixed(2)}`);
+    const status = isPendingPayment ? 'Pago Pendiente' : (pago.ESTADO_PAGOS === 'Completo' ? 'Pago Completo' : 'Pago Pendiente');
     
-    // Verifica si MONTO_PAGOS es un número antes de formatearlo
-    const formattedAmount = isNaN(pago.MONTO_PAGOS) ? 'Monto no válido' : `$${Number(pago.MONTO_PAGOS).toFixed(2)}`;
-    
-    let status;
-    if (pago.ESTADO_PAGOS === 'Completo') {
-      status = 'Pagado';
-    } else {
-      status = 'Pendiente'; // Puedes agregar más condiciones según los posibles estados de pago
-    }
-  
-    if (formattedDate === 'Fecha pendiente' || formattedAmount === 'Monto no válido' || status === 'Pendiente') {
-      return 'Pago pendiente';
-    }
+    const paymentInfo = `Monto total a pagar: ${formattedAmount}`;
+    const montoPagado = `Monto Aportado: ${amountPaid}`;
   
     return `
       <div>Fecha de pago: ${formattedDate}</div>
-      <div>Monto: ${formattedAmount}</div>
+      <div>${paymentInfo}</div>
+      <div>${montoPagado}</div>
       <div>Estado: ${status}</div>
     `;
   }
+  
+  
+  
   
   pagar(card:any) {
     if (card.pagos && card.pagos.length > 0) {
@@ -134,20 +133,33 @@ export class DashboardComponent {
     
   }
   getFormattedDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = this.padZero(date.getMonth() + 1); // Sumamos 1 porque los meses van de 0 a 11
-    const day = this.padZero(date.getDate());
+    const adjustedDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60 * 1000));
+    const year = adjustedDate.getFullYear();
+    const month = this.padZero(adjustedDate.getMonth() + 1);
+    const day = this.padZero(adjustedDate.getDate());
   
     return `${year}-${month}-${day}`;
   }
-  
+ 
   padZero(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
   }
 
-  pagarAnticipo() {
+  pagarAnticipo(card:any) {
+    const pagoAnticipo = card.pagos[0];
+    pagoAnticipo.ID_PAC
+    const dialogRef = this.dialog.open(ModalpagosComponent, {
+      width: '300px', // Ajusta el ancho según lo que necesites
+      data: {pagoAnticipo}
+    });
     
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Modal cerrado', result);
+      // Aquí puedes agregar lógica después de cerrar el modal si es necesario
+    });
   }
+  
   
   
   

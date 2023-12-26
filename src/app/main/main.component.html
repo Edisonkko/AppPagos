@@ -38,6 +38,13 @@
             <router-outlet></router-outlet>
             <div class="grid-container" *ngIf="isMainPage">
               <h1 class="mat-h1">Gestión de Pagos DirecTV</h1>
+              <!-- Agregar el spinner de carga -->
+              <div class="loading-container" *ngIf="cards.length === 0">
+                <div class="spinner-wrapper">
+                  <mat-progress-spinner mode="indeterminate" diameter="50" strokeWidth="5" color="primary"></mat-progress-spinner>
+                </div>
+                <p>Cargando datos...</p>
+              </div>
               <mat-grid-list cols="1" rowHeight="350px">
                 <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
                   <mat-card class="dashboard-card">

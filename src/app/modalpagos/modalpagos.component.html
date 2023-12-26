@@ -1,0 +1,21 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput [matDatepicker]="picker" placeholder="Fecha de Pagos" [(ngModel)]="fechaPagos" name="fechaPagos">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Monto de Pagos" type="number" [(ngModel)]="montoPagos" name="montoPagos">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Estado de Pagos</mat-label>
+    <mat-select [(ngModel)]="estadoPagos" name="estadoPagos">
+      <mat-option value="Completo">Completo</mat-option>
+      <mat-option value="Pendiente">Pendiente</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="guardarPago()">Guardar</button>
+</form>

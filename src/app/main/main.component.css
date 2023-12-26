@@ -335,7 +335,24 @@
     font-weight: bold; /* Peso de la fuente */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para un efecto sutil */
   }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajusta la altura según sea necesario */
+  }
   
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .spinner-wrapper mat-progress-spinner {
+    margin-bottom: 10px;
+  }
   
   
   

@@ -92,38 +92,36 @@ export class MainComponent {
           title: clientName,
           cols: 1,
           rows: 1,
-          content: 'Pago pendiente'
+          content: this.formatPaymentData(pago)
         });
       }
       return cards;
     }, []);
   
     this.cards = [...currentMonthCards, ...notCurrentMonthCards];
+    this.cards.forEach((card) => {
+      const pagosPersona = this.pagos.filter((pago) => pago.Nombre_Cliente === card.title);
+      card.pagos = pagosPersona; // Almacena los pagos asociados a esta persona en la tarjeta
+    });
   }
   
   
   
 
   formatPaymentData(pago: any) {
-    const formattedDate = pago.FECHA_PAGOS ? new Date(pago.FECHA_PAGOS).toLocaleDateString() : 'Fecha pendiente';
+    const isPendingPayment = pago.content === 'Pago pendiente';
+    const formattedDate = isPendingPayment ? new Date().toLocaleDateString() : (pago.FECHA_PAGOS ? new Date(pago.FECHA_PAGOS).toLocaleDateString() : 'Fecha pendiente');
+    const formattedAmount = `$${Number(18).toFixed(2)}`;
+    const amountPaid = isPendingPayment ? '$0.00' : (isNaN(pago.MONTO_PAGOS) ? 'Monto no válido' : `$${Number(pago.MONTO_PAGOS).toFixed(2)}`);
+    const status = isPendingPayment ? 'Pago Pendiente' : (pago.ESTADO_PAGOS === 'Completo' ? 'Pago Completo' : 'Pago Pendiente');
     
-    // Verifica si MONTO_PAGOS es un número antes de formatearlo
-    const formattedAmount = isNaN(pago.MONTO_PAGOS) ? 'Monto no válido' : `$${Number(pago.MONTO_PAGOS).toFixed(2)}`;
-    
-    let status;
-    if (pago.ESTADO_PAGOS === 'Completo') {
-      status = 'Pagado';
-    } else {
-      status = 'Pendiente'; // Puedes agregar más condiciones según los posibles estados de pago
-    }
-  
-    if (formattedDate === 'Fecha pendiente' || formattedAmount === 'Monto no válido' || status === 'Pendiente') {
-      return 'Pago pendiente';
-    }
+    const paymentInfo = `Monto total a pagar: ${formattedAmount}`;
+    const montoPagado = `Monto Aportado: ${amountPaid}`;
   
     return `
       <div>Fecha de pago: ${formattedDate}</div>
-      <div>Monto: ${formattedAmount}</div>
+      <div>${paymentInfo}</div>
+      <div>${montoPagado}</div>
       <div>Estado: ${status}</div>
     `;
   }
