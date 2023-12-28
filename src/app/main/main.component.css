@@ -1,4 +1,26 @@
- 
+/* Estilos para diferentes tamaños de pantalla */
+.responsive-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px; /* Ajusta el espaciado interno */
+}
+
+.responsive-toolbar span.logo {
+  margin: 8px 0; /* Combinando margin-top y margin-bottom */
+  font-size: 1.5em; /* Ajusta el tamaño de la fuente del logo */
+}
+
+.responsive-toolbar .navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0;
+}
+
+.responsive-toolbar .navigation a.mat-button {
+  margin-left: 0;
+}
   
   mat-toolbar {
     background: #650476;
